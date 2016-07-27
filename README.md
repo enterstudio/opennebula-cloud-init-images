@@ -7,7 +7,6 @@ Installed and configured:
 * GNU make
 * libvirt and QEMU/KVM
 * virt-install
-* ONE tools (oneimage)
 * disabled SELinux?
 * ksvalidator (from pykickstart package)
 
