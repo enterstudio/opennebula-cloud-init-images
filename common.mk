@@ -18,7 +18,6 @@ VI?=virt-install \
 	--wait=$(VI_TIMEOUT) \
 	--disk path=$@.tmp,format=raw,size=$(SIZE),cache=unsafe,sparse=true,bus=virtio \
 	--network=user,model=virtio \
-	--network=user,model=virtio \
 	--video=vga \
 	--noreboot
 VI_NAME?=build-$(ON_PREFIX)

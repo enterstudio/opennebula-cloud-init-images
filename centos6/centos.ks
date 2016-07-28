@@ -7,7 +7,6 @@ keyboard us
 timezone --utc CET
 firstboot --disable
 network --device=eth0 --bootproto dhcp --onboot=yes
-network --device=eth1 --bootproto dhcp --onboot=yes
 skipx
 cmdline
 poweroff

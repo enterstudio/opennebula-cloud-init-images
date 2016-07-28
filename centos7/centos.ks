@@ -8,7 +8,6 @@ keyboard us
 timezone --utc --ntpservers=ntp.muni.cz,tik.cesnet.cz,tak.cesnet.cz Europe/Prague
 firstboot --disable
 network --device=eth0 --bootproto dhcp --onboot=yes
-network --device=eth1 --bootproto dhcp --onboot=yes
 skipx
 cmdline
 poweroff
