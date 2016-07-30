@@ -20,7 +20,7 @@ VI?=virt-install \
 	--network=user,model=virtio \
 	--video=vga \
 	--noreboot
-VI_NAME?=build-$(ON_PREFIX)
+VI_NAME?=build-$(OS)-$(OS_VERSION)
 VI_CPU?=2
 VI_RAM?=1536
 VI_TIMEOUT?=45
