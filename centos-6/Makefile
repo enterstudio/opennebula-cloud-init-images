@@ -1,4 +1,4 @@
-OS=CERIT-SC-CentOS
+OS=CentOS
 OS_VERSION=6
 
 include ../common.mk

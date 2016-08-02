@@ -1,4 +1,4 @@
-OS=CERIT-SC-Debian
+OS=Debian
 OS_VERSION=8
 OS_CODE=jessie
 
