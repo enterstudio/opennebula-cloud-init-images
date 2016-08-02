@@ -9,13 +9,20 @@ Installed and configured:
 * virt-install
 * disabled SELinux?
 * ksvalidator (from pykickstart package)
+* xmllint
+
+# Supported systems
+
+* CentOS 6, 7
+* Debian 8
+* OpenSUSE 42.1 (*in progress*)
 
 # Quick Start
 
 Build latest CentOS 7:
 
 ```bash
-$ cd centos7
+$ cd centos-7
 $ make build
 $ make clean
 ```
