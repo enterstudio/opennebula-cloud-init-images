@@ -1,5 +1,9 @@
 # Build base OS images for OpenNebula KVM cloud
 
+These scripts help with building base OS images with
+[cloud-init](http://cloudinit.readthedocs.io/)
+contextualization for the OpenNebula KVM cloud.
+
 ### Requirements
 
 Installed and configured:
@@ -15,7 +19,7 @@ Installed and configured:
 
 * CentOS 6, 7
 * Debian 8
-* OpenSUSE 42.1 (*in progress*)
+* OpenSUSE 42.1
 
 # Quick Start
 

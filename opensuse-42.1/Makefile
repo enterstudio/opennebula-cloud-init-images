@@ -1,5 +1,6 @@
 OS=OpenSUSE
 OS_VERSION=42.1
+VI_NOREBOOT=
 
 include ../common.mk
 

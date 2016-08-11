@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+<!-- https://doc.opensuse.org/projects/autoyast/ -->
 <!DOCTYPE profile>
 <profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
   <add-on>
@@ -55,6 +56,7 @@
   <deploy_image>
     <image_installation config:type="boolean">false</image_installation>
   </deploy_image>
+  <!--
   <firewall>
     <FW_ALLOW_FW_BROADCAST_DMZ>no</FW_ALLOW_FW_BROADCAST_DMZ>
     <FW_ALLOW_FW_BROADCAST_EXT>no</FW_ALLOW_FW_BROADCAST_EXT>
@@ -77,10 +79,12 @@
     <enable_firewall config:type="boolean">false</enable_firewall>
     <start_firewall config:type="boolean">false</start_firewall>
   </firewall>
+  -->
   <general>
     <ask-list config:type="list"/>
     <mode>
       <confirm config:type="boolean">false</confirm>
+      <final_halt config:type="boolean">true</final_halt>
     </mode>
     <proposals config:type="list"/>
     <signature-handling>
@@ -357,11 +361,13 @@
       <userlist/>
     </group>
   </groups>
+  <!--
   <kdump>
     <add_crash_kernel config:type="boolean">false</add_crash_kernel>
     <crash_kernel config:type="list"/>
     <general/>
   </kdump>
+  -->
   <scripts>
     <chroot-scripts config:type="list">
       <script>
@@ -374,7 +380,32 @@ cp /cloud.cfg /mnt/etc/cloud/
 ]]>
         </source>
       </script>
+      <script>
+        <filename>fix-udev.sh</filename>
+        <chrooted config:type="boolean">true</chrooted>
+        <interpreter>shell</interpreter>
+        <notification>Fixing persistent udev rules...</notification>
+        <source><![CDATA[
+unlink /etc/udev/rules.d/70-persistent-net.rules
+ln -s /dev/null /etc/udev/rules.d/70-persistent-net.rules
+]]>
+        </source>
+      </script>
     </chroot-scripts>
+    <init-scripts config:type="list">
+      <script>
+        <filename>enable-cloud_init.sh</filename>
+        <interpreter>shell</interpreter>
+        <notification>Enabling cloud-init...</notification>
+        <source><![CDATA[
+systemctl enable cloud-init-local
+systemctl enable cloud-init
+systemctl enable cloud-config
+systemctl enable cloud-final
+]]>
+        </source>
+      </script>
+    </init-scripts>
   </scripts>
   <keyboard>
     <keyboard_values>
@@ -403,6 +434,11 @@ cp /cloud.cfg /mnt/etc/cloud/
         <startmode>auto</startmode>
       </interface>
       <interface>
+        <bootproto>dhcp</bootproto>
+        <device>eth1</device>
+        <startmode>auto</startmode>
+      </interface>
+      <interface>
         <bootproto>static</bootproto>
         <broadcast>127.255.255.255</broadcast>
         <device>lo</device>
@@ -418,13 +454,6 @@ cp /cloud.cfg /mnt/etc/cloud/
     <ipv6 config:type="boolean">true</ipv6>
     <keep_install_network config:type="boolean">false</keep_install_network>
     <managed config:type="boolean">false</managed>
-    <net-udev config:type="list">
-      <rule>
-        <name>eth0</name>
-        <rule>ATTR{address}</rule>
-        <value>52:54:00:fd:14:ca</value>
-      </rule>
-    </net-udev>
     <routing>
       <ipv4_forward config:type="boolean">false</ipv4_forward>
       <ipv6_forward config:type="boolean">false</ipv6_forward>
@@ -496,7 +525,7 @@ cp /cloud.cfg /mnt/etc/cloud/
     <errors>
       <log config:type="boolean">true</log>
       <show config:type="boolean">true</show>
-      <timeout config:type="integer">0</timeout>
+      <timeout config:type="integer">10</timeout>
     </errors>
     <messages>
       <log config:type="boolean">true</log>
@@ -544,6 +573,8 @@ cp /cloud.cfg /mnt/etc/cloud/
     <patterns config:type="list">
       <pattern>yast2_basis</pattern>
       <pattern>base</pattern>
+      <pattern>enhanced_base</pattern>
+      <pattern>sw_management</pattern>
     </patterns>
   </software>
   <timezone>

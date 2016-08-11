@@ -8,6 +8,7 @@ ROOT_PASSWORD:=$(shell dd if=/dev/urandom bs=1 count=64 2>/dev/null | base64 | a
 LIBVIRT_URI?=qemu:///session 
 
 # virt-install
+VI_NOREBOOT?=--noreboot
 VI?=virt-install \
 	--force \
 	--console pty \
@@ -19,7 +20,7 @@ VI?=virt-install \
 	--disk path=$@.tmp,format=raw,size=$(SIZE),cache=unsafe,sparse=true,bus=virtio \
 	--network=user,model=virtio \
 	--video=vga \
-	--noreboot
+	$(VI_NOREBOOT)
 VI_NAME?=build-$(OS)-$(OS_VERSION)
 VI_CPU?=2
 VI_RAM?=1536
