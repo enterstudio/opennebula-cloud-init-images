@@ -394,14 +394,15 @@ ln -s /dev/null /etc/udev/rules.d/70-persistent-net.rules
     </chroot-scripts>
     <init-scripts config:type="list">
       <script>
-        <filename>enable-cloud_init.sh</filename>
+        <filename>build-init-script.sh</filename>
         <interpreter>shell</interpreter>
-        <notification>Enabling cloud-init...</notification>
+        <notification>Running custom init script...</notification>
         <source><![CDATA[
 systemctl enable cloud-init-local
 systemctl enable cloud-init
 systemctl enable cloud-config
 systemctl enable cloud-final
+rm -r -f /etc/ssh/ssh_host_*
 ]]>
         </source>
       </script>
