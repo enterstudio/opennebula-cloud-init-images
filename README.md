@@ -1,8 +1,10 @@
 # Build base OS images for OpenNebula KVM cloud
 
-These scripts help with building base OS images with
+These tools help with building base OS images with
 [cloud-init](http://cloudinit.readthedocs.io/)
-contextualization for the OpenNebula KVM cloud.
+contextualization for the OpenNebula KVM cloud. Significant work has
+been done for [CERIT Scientific Cloud](http://www.cerit-sc.cz/),
+later forked and extended for more systems (openSUSE, Fedora etc.)
 
 ### Requirements
 
