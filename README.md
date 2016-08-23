@@ -20,6 +20,7 @@ Installed and configured:
 # Supported systems
 
 * CentOS 6, 7
+* Fedora 24
 * Debian 8
 * OpenSUSE 42.1
 
