@@ -5,7 +5,7 @@
 install
 lang en_US.UTF-8
 keyboard us
-timezone --utc --ntpservers=ntp.muni.cz,tik.cesnet.cz,tak.cesnet.cz Europe/Prague
+timezone --utc Etc/UTC
 firstboot --disable
 #network --device=eth0 --bootproto dhcp --onboot=yes
 skipx

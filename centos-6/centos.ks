@@ -4,7 +4,7 @@ text
 install
 lang en_US.UTF-8
 keyboard us
-timezone --utc CET
+timezone --utc Etc/UTC
 firstboot --disable
 network --device=eth0 --bootproto dhcp --onboot=yes
 skipx

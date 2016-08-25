@@ -580,7 +580,7 @@ rm -r -f /etc/ssh/ssh_host_*
   </software>
   <timezone>
     <hwclock>UTC</hwclock>
-    <timezone>Europe/Prague</timezone>
+    <timezone>Etc/UTC</timezone>
   </timezone>
   <user_defaults>
     <expire/>
