@@ -33,17 +33,19 @@ repo --name=extras  --baseurl=http://mirror.centos.org/centos/7/extras/x86_64/
 @base
 @core
 @ Development Tools
+cloud-init
+cloud-utils-growpart
 emacs-nox
 mc
 dstat
 xorg-x11-xauth
 xterm
+epel-release
 %end
 
 %post --nochroot --erroronfail --log=/dev/console
 set -e
 install -Dp --mode=644 /cloud.cfg /mnt/sysimage/etc/cloud/cloud.cfg
-install -Dp --mode=644 /RPM-GPG-KEY-EPEL-7.cfg /mnt/sysimage/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
 quotacheck -vcguma
 chroot /mnt/sysimage restorecon -Fi aquota.user aquota.group
 quotaon -a
@@ -51,20 +53,6 @@ quotaon -a
 
 %post --erroronfail --log=/dev/console
 set -e
-rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
-
-cat <<EOF >/etc/yum.repos.d/epel.repo
-[epel]
-name=Extra Packages for Enterprise Linux 7 - \$basearch
-#baseurl=http://download.fedoraproject.org/pub/epel/7/\$basearch
-mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-7&arch=\$basearch
-failovermethod=priority
-enabled=1
-gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
-EOF
-
-yum -y install cloud-init cloud-utils-growpart
 yum clean all
 
 # network fixes

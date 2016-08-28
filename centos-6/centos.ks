@@ -31,17 +31,18 @@ repo --name=extras  --baseurl=http://mirror.centos.org/centos/6/extras/x86_64/
 %packages
 @core
 @ Development Tools
+cloud-init
 emacs-nox
 mc
 dstat
 xorg-x11-xauth
 xterm
+epel-release
 %end
 
 %post --nochroot --erroronfail
 set -e
 install -Dp --mode=644 /cloud.cfg /mnt/sysimage/etc/cloud/cloud.cfg
-install -Dp --mode=644 /RPM-GPG-KEY-EPEL-6.cfg /mnt/sysimage/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6
 quotacheck -vcguma
 chroot /mnt/sysimage restorecon -Fi aquota.user aquota.group
 quotaon -a
@@ -49,19 +50,7 @@ quotaon -a
 
 %post --erroronfail
 set -e
-rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6
-
-cat <<EOF >/etc/yum.repos.d/epel.repo
-[epel]
-name=Extra Packages for Enterprise Linux 6 - \$basearch
-mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-6&arch=\$basearch
-failovermethod=priority
-enabled=1
-gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6
-EOF
-
-yum -y install cloud-init cloud-utils-growpart
+yum -y install cloud-utils-growpart
 yum clean all
 
 # hack cloud-init to execute sudo instead of runuser

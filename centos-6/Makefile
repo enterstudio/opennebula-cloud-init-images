@@ -10,7 +10,7 @@ FORCE:
 %.ks: FORCE
 	ksvalidator -v RHEL6 $@
 
-$(IMAGE).raw: centos.ks cloud.cfg ../RPM-GPG-KEY-EPEL-6.cfg
+$(IMAGE).raw: centos.ks cloud.cfg
 	rm -f $@.tmp
 	$(VI) --nographics \
 		--os-variant=rhel6 \
